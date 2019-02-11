@@ -25,7 +25,6 @@ mongoose.connect("mongodb://localhost/hwscraperdb", { useNewUrlParser: true });
 //ADD Routes
 app.get("/", function (req, res) {
 
-
     axios.get("https://www.nytimes.com/section/world").then(function (response) {
         var $ = cheerio.load(response.data)
 
@@ -33,11 +32,11 @@ app.get("/", function (req, res) {
             var result = {};
 
             result.title = $(this)
-                .children("a")
+                .children("h2")
                 .text();
 
             result.link = $(this)
-                .children("a")
+                .children("h2")
                 .attr("href")
 
             db.Article.create(result)
@@ -53,7 +52,7 @@ app.get("/", function (req, res) {
     });
 });
 
-app.get("/Article", function(){
+app.get("/Article", function(req, res){
     db.Article.find({})
     .then(function (dbArticle) {
         res.json(dbArticle)
