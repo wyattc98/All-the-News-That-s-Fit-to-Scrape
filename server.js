@@ -5,7 +5,7 @@ const cheerio = require("cheerio");
 const logger = require("morgan")
 const db = require("./models")
 
-const PORT = 8080;
+const PORT = 8080 || process.env.PORT;
 
 const app = express();
 
