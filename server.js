@@ -23,32 +23,32 @@ app.use(express.static("public"));
 mongoose.connect("mongodb://localhost/hwscraperdb", { useNewUrlParser: true });
 
 //ADD Routes
-app.get("/", function (req, res) {
+app.get("/Scrape", function (req, res) {
+    axios.get("https://www.ign.com/").then(function (response) {
+    var $ = cheerio.load(response.data);
 
-    axios.get("https://www.nytimes.com/section/world").then(function (response) {
-        var $ = cheerio.load(response.data)
+    console.log("*****************");
 
-        $("article h2").each(function(i, element) {
+        $("section article").each(function(i, element) {
             var result = {};
 
             result.title = $(this)
-                .children("h2")
-                .text();
-
+              .children("a")
+              .text();
             result.link = $(this)
-                .children("h2")
-                .attr("href")
+              .children("a")
+              .attr("href")
 
             db.Article.create(result)
-                .then(function(dbArticle) {
-                    console.log(dbArticle)
-                })
-                .catch(function(err) {
-                    console.log(err)
-                })
-
+             .then(function(dbArticle){
+                 console.log(dbArticle)
+             })
+             .catch(function(err){
+                 console.log(err)
+             })
         });
         res.send("Scrape Complete!")
+        res.redirect("/")
     });
 });
 

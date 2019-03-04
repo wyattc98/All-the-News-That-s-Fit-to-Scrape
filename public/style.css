@@ -1,0 +1,15 @@
+.wrapper {
+  background-image: url("https://images.pexels.com/photos/296890/pexels-photo-296890.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  background-repeat: no-repeat;
+  height: 60%;
+}
+
+.wrapper h1 {
+  text-align: center;
+  color: white;
+}
+
+h1 {
+  font-size: 66px;
+  padding-top: 15%;
+}
