@@ -73,7 +73,7 @@ app.get("/Article", function(req, res){
     });
 })
 
-app.listen(PORT, function () {
+app.listen(process.env.PORT, function () {
     console.log("Listening on port: " + PORT + "!")
 });
 
