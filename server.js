@@ -5,7 +5,7 @@ const cheerio = require("cheerio");
 const logger = require("morgan")
 const db = require("./models")
 
-const PORT = 8080 || process.env.PORT;
+const PORT = process.env.PORT || 8080;
 
 const app = express();
 
@@ -73,7 +73,7 @@ app.get("/Article", function(req, res){
     });
 })
 
-app.listen(process.env.PORT, function () {
+app.listen(PORT, function () {
     console.log("Listening on port: " + PORT + "!")
 });
 
