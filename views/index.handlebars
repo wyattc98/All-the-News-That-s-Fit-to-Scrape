@@ -1,0 +1,39 @@
+<nav class="nav" style="background-color:black;">
+    <a class="nav-link" style="color: white; font-size: 24px;">The Morning Scrape</a>
+    <a class="nav-link" style="color: white;" href="/Scrape">Press Here to Scrape!</a>
+    <a class="nav-link" style="color: white;" href="#">Saved Articles</a>
+    <a class="nav-link"><button type="button" class="btn btn-outline-primary">Saved Articles</button></a>
+    <a class="nav-link"><button type="button" class="btn btn-outline-danger">Delete Articles</button></a>
+</nav>
+<div class="jumbotron" background="../images/jumbo.jpg">
+    <h1>The Morning Scrape</h1>
+</div>
+<div class="results">
+    <div id="Article">
+        <div class="col-12">
+            {{#if articles}}
+            {{#each articles}}
+            <div class="card w-90">
+                <div class="card-header text-white bg-primary">
+                    <a href={{link}} target="_blank" class="text-white">
+                        <h2>{{title}}</h2>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        Here's what we Scraped Up!
+                    </p>
+                    <button id="{{_id}}" class="btn btn-primary save-btn">Save Article</button>
+                </div>
+            </div>
+            {{/each}}
+            {{else}}
+            <div class="card text-white bg-secondary w-90 p-1">
+                <div class="card-body text-center">
+                    Uh oh. Looks like we don't have any new articles
+                </div>
+            </div>
+            {{/if}}
+        </div>
+        <div id="notes"></div>
+    </div>

@@ -13,7 +13,9 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/hwscraperdb";
 
 mongoose.connect(MONGODB_URI);
 
-
+const exphbs = require("express-handlebars");
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
 app.use(logger("dev"));
 app.use(express.urlencoded({ extended: true }));
@@ -22,7 +24,15 @@ app.use(express.static("public"));
 
 mongoose.connect("mongodb://localhost/hwscraperdb", { useNewUrlParser: true });
 
-//ADD Routes
+app.get("/", function(req, res) {
+    db.Article.find({})
+    .then(function(dbArticle) {
+        let hbsObject = {
+            articles: dbArticle
+        }
+      res.render("index", hbsObject );
+    });  })
+
 app.get("/Scrape", function (req, res) {
     axios.get("https://www.ign.com/").then(function (response) {
     var $ = cheerio.load(response.data);
@@ -34,7 +44,8 @@ app.get("/Scrape", function (req, res) {
 
             result.title = $(this)
               .children("a")
-              .text();
+              .text()
+              .trim();
             result.link = $(this)
               .children("a")
               .attr("href")
@@ -47,7 +58,7 @@ app.get("/Scrape", function (req, res) {
                  console.log(err)
              })
         });
-        res.send("Scrape Complete!")
+        res.send("Scrape Complete press back button in Browser for Results!")
         res.redirect("/")
     });
 });
