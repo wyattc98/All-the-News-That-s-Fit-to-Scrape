@@ -76,3 +76,10 @@ app.get("/Article", function(req, res){
 app.listen(PORT, function () {
     console.log("Listening on port: " + PORT + "!")
 });
+
+app.get("/Saved", function(req, res){
+    db.Article.find({ saved: true })
+    .then(function(dbArticle){
+        res.render("saved", { articles: dbArticle})
+    });
+});

@@ -1,0 +1,31 @@
+<nav class="nav" style="background-color:black;">
+    <a class="nav-link" style="color: white; font-size: 24px;" href="/">The Morning Scrape</a>
+    <a class="nav-link" style="color: white;" href="/Scrape">Press Here to Scrape!</a>
+    <a class="nav-link" style="color: white;" href="/Saved">Saved Articles</a>
+    <a class="nav-link" href="/Article"><button type="button" class="btn btn-outline-primary">All Articles</button></a>
+</nav>
+<div class="jumbotron" background="../images/jumbo.jpg">
+    <h1>The Morning Scrape</h1>
+</div>
+
+
+<div class=row>
+    <div class="col-12">
+        {{#each articles}}
+        <div class="card w-90">
+            <div class="card-header text-white bg-primary">
+                <a href={{link}} target="_blank" class="text-white">
+                    <h2>{{title}}</h2>
+                </a>
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    {{summary}}
+                </p>
+                <button data="{{_id}}" class="btn btn-info note-btn">Article Notes</button>
+                <button data="{{_id}}" class="btn btn-danger delete-btn">Delete From Saved</button>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
